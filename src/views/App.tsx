@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './app.less';
 
 interface Props {
 
@@ -7,7 +8,7 @@ interface Props {
 const App: React.FC<Props> = () => {
 
 	return (
-		<div>
+		<div className={style.app}>
 			hello bamboo
 		</div>
 	)
