@@ -1,11 +1,16 @@
 import React from 'react';
 
-const App: React.FC<{}> = () => {
-    return (
-        <div>
-            hello bamboo
-        </div>
-    )
+interface Props {
+
 }
+
+const App: React.FC<Props> = () => {
+
+	return (
+		<div>
+			hello bamboo
+		</div>
+	)
+};
 
 export default App;
