@@ -140,7 +140,7 @@ class RawFrame extends BambooComponent<IProps, IState> {
             <Header>
               <div className="logo-title-area" onClick={this.goHome.bind(this)}>
                 <img className="header-logo" src={LogoSvg} alt="logo"/>
-                <span className="header-title">质谱分析平台</span>
+                <span className="header-title">bamboo</span>
               </div>
             </Header>
             <Content>
