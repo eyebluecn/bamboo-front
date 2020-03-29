@@ -76,26 +76,27 @@ export default class Detail extends BambooComponent<IProps, IState> {
 
           <div className="info">
 
-            <Row>
-              <Col span={12}>
-                <InfoCell name="文章名称">
-                  {article.title}
-                </InfoCell>
-              </Col>
-              <Col span={12}>
-                <InfoCell name="作者">
-                  {article.author}
-                </InfoCell>
-              </Col>
-              <Col span={12}>
-                <InfoCell name="路径">
-                  {article.path}
-                </InfoCell>
-              </Col>
+            {/*<Row>*/}
+            {/*  <Col span={12}>*/}
+            {/*    <InfoCell name="文章名称">*/}
+            {/*      {article.title}*/}
+            {/*    </InfoCell>*/}
+            {/*  </Col>*/}
+            {/*  <Col span={12}>*/}
+            {/*    <InfoCell name="作者">*/}
+            {/*      {article.author}*/}
+            {/*    </InfoCell>*/}
+            {/*  </Col>*/}
+            {/*  <Col span={12}>*/}
+            {/*    <InfoCell name="路径">*/}
+            {/*      {article.path}*/}
+            {/*    </InfoCell>*/}
+            {/*  </Col>*/}
 
 
-            </Row>
+            {/*</Row>*/}
 
+            <div className="article" dangerouslySetInnerHTML={{__html: ''+ article.html}} />
 
           </div>
 

@@ -40,6 +40,7 @@ export default class Article extends BaseEntity {
       title: this.title,
       path: this.path,
       author: this.author,
+      html: this.html,
       uuid: this.uuid ? this.uuid : null,
     };
   }

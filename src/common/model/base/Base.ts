@@ -30,7 +30,7 @@ export default class Base {
 
   //把obj中的属性，赋值到this中来。采用深拷贝。
   assign(obj: any) {
-    ObjectUtil.deepExtend(this, obj)
+    ObjectUtil.extend(this, obj)
   }
 
   /**

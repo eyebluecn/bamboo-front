@@ -7,6 +7,8 @@ import Article from '../../common/model/article/Article';
 import StringUtil from '../../common/util/StringUtil';
 import './Edit.less';
 import BambooTitle from '../widget/BambooTitle';
+import BraftEditor, {EditorState} from 'braft-editor';
+import 'braft-editor/dist/index.css';
 
 const { MonthPicker, RangePicker } = DatePicker;
 
@@ -21,6 +23,7 @@ interface IProps extends RouteComponentProps<RouteParam>, FormComponentProps {
 }
 
 interface IState {
+  editor: EditorState
 }
 
 class RawEdit extends BambooComponent<IProps, IState> {
@@ -30,25 +33,26 @@ class RawEdit extends BambooComponent<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      editor: BraftEditor.createEditorState(null)
+    };
   }
 
   componentDidMount() {
 
     //刷新一下列表
-    let that = this;
 
     let match = this.props.match;
-    let article = that.article;
+    let article = this.article;
 
     if (match.params.uuid) {
       this.createMode = false;
 
       article.uuid = match.params.uuid;
 
-      article.httpDetail(function() {
-
-        that.initFormValue();
+      article.httpDetail(() => {
+        this.handleEditorChange(BraftEditor.createEditorState(article.html));
+        this.initFormValue();
       });
 
     } else {
@@ -84,7 +88,7 @@ class RawEdit extends BambooComponent<IProps, IState> {
 
     this.props.form.validateFieldsAndScroll((err, fieldsValue) => {
       if (!err) {
-
+        article.html = this.state.editor.toHTML();
         //基本的字段一次性复制。
         article.assign(fieldsValue);
 
@@ -123,6 +127,9 @@ class RawEdit extends BambooComponent<IProps, IState> {
     this.props.history.push(this.getPrePath() + '/list');
   }
 
+  handleEditorChange = (editor: EditorState) => {
+    this.setState({editor})
+  }
 
   render() {
 
@@ -133,6 +140,7 @@ class RawEdit extends BambooComponent<IProps, IState> {
     let article = this.article;
 
     const { getFieldDecorator } = this.props.form;
+    const { editor } = this.state;
 
 
     const formItemLayout = {
@@ -217,6 +225,15 @@ class RawEdit extends BambooComponent<IProps, IState> {
 
 
             </Row>
+
+            {/*内容主体部分*/}
+            <Form.Item label='内容主体'>
+                  <BraftEditor
+                    value={editor}
+                    onChange={this.handleEditorChange}
+                    onSave={() => {}}
+                  />
+            </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
 
